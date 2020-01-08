@@ -14,7 +14,7 @@
       default-link-stroke-width="1"
       default-link-stroke-color="#000"
     ></eg-renderer>
-    <button @click="layout">描画</button>
+    <button @click="layout">描画する</button>
   </div>
 
 </template>

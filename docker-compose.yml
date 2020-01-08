@@ -1,0 +1,25 @@
+version: '3'
+services:
+  nginx:
+    build: docker/nginx
+    ports:
+      - '80:80'
+      - '443:443'
+    restart: always
+    tty: true
+  vue:
+    image: node:latest
+    volumes:
+      - ./src/vue:/home/app/vue
+      - /home/app/vue/node_modules
+    tty: true
+    working_dir: /home/app/vue
+    command: [bash, -c, npm install && npm start]
+  uwsgi:
+    build: docker/python
+    volumes:
+      - ./src/python:/var/www/app
+    tty: true
+    environment:
+      TZ: "Asia/Tokyo"
+    command: ["uwsgi","--ini","/var/www/app/uwsgi.ini"]

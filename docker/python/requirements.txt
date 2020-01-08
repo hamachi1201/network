@@ -1,0 +1,5 @@
+Flask
+uwsgi
+networkx
+matplotlib
+neo4j

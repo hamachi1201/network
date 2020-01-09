@@ -1,5 +1,8 @@
 <template>
   <div>
+      <div class="wrapper">
+        <Hello />
+      </div>
     <eg-renderer
       ref="gene"
       width="600"
@@ -20,6 +23,8 @@
 </template>
 
 <script>
+
+import Hello from '@/components/HelloWorld.vue'
 
 import '@webcomponents/custom-elements'
 import axios from 'axios'
@@ -50,7 +55,7 @@ const applyOGDF = (graphData) => {
   graph.allNodes(nodes)
 
   const layout = new FMMMLayout()
-  layout.unitEdgeLength = 20
+  layout.unitEdgeLength = 200
   layout.call(attributes)
 
   for (const u of graphData.nodes) {
@@ -62,7 +67,6 @@ const applyOGDF = (graphData) => {
 
 const applyEdgeBundling = (graphData, mod) => {
   const { Graph: EGraph, ForceDirectedEdgeBundling } = mod
-
   const indexToNode = new Map()
   const graph = new EGraph()
   graphData.nodes.forEach((node, i) => {
@@ -84,12 +88,12 @@ const applyEdgeBundling = (graphData, mod) => {
 const layout = (graphData) => {
   return egraph().then((mod) => {
     applyOGDF(graphData)
-
     applyEdgeBundling(graphData, mod)
   })
 }
 
 export default {
+  components: { Hello },
   name: 'App',
   data: function () {
     return {

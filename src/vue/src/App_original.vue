@@ -32,6 +32,7 @@
 <script>
 
 import Hello from '@/components/HelloWorld.vue'
+
 import '@webcomponents/custom-elements'
 import axios from 'axios'
 import {
@@ -91,12 +92,11 @@ const applyEdgeBundling = (graphData, mod) => {
   })
 }
 
-const layout = (graphData, isBundling) => {
+const layout = (graphData) => {
   return egraph().then((mod) => {
     applyOGDF(graphData)
-    if (isBundling) {
-      applyEdgeBundling(graphData, mod)
-    })
+    applyEdgeBundling(graphData, mod)
+  })
 }
 
 export default {
@@ -134,10 +134,7 @@ export default {
         Object.assign(this.data, graphData)
         this.$refs.gene.update()
         this.$refs.gene.autoCentering = false
-      },
-    setIsBundling: function (value) {
-      this.$refs.gene.$emit('drawGraph', {isBundling: value})
-      },)
+      })
     }
   }
 }
